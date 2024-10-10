@@ -3,11 +3,13 @@ package org.iftm.client_api_rest.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_client")
@@ -17,11 +19,20 @@ public class Client implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", length = 120, nullable = false)
     private String name;
+    @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
+    @Column(name = "income", nullable = false)
     private Double income;
+    @Column(name = "birthDate")
     private Instant birthDate;
+    @Column(name = "children")
     private Integer children;
+
+    //atributo que não persiste no banco de dados
+    @Transient
+    private String dadoTemporario;
     
     public Client() {
     }
