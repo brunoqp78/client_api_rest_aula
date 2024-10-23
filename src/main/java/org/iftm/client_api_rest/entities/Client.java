@@ -2,12 +2,17 @@ package org.iftm.client_api_rest.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -33,18 +38,34 @@ public class Client implements Serializable{
     //atributo que não persiste no banco de dados
     @Transient
     private String dadoTemporario;
+
+    @OneToOne
+    private Address address;
+
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany
+    private Set<Client> relatives = new HashSet<>();
     
     public Client() {
     }
 
-    public Client(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
+    
+
+    public Client(Long id, String name, String cpf, Double income, Instant birthDate, Integer children,
+            Address address, Category category) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.income = income;
         this.birthDate = birthDate;
         this.children = children;
+        this.address = address;
+        this.category = category;
     }
+
+
 
     public Long getId() {
         return id;
@@ -94,7 +115,47 @@ public class Client implements Serializable{
         this.children = children;
     }
 
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+
+
+    public Category getCategory() {
+        return category;
+    }
+
+
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+
+
+    public Set<Client> getRelatives() {
+        return relatives;
+    }
+
+
+
+    public void setRelatives(Set<Client> relatives) {
+        this.relatives = relatives;
+    }
+
     
 
+    
+
+    
+    
     
 }
