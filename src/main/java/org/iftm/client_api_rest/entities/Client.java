@@ -39,13 +39,16 @@ public class Client implements Serializable{
     @Transient
     private String dadoTemporario;
 
-    @OneToOne
+    //@OneToOne
+    @Transient
     private Address address;
 
-    @ManyToOne
+    //@ManyToOne
+    @Transient
     private Category category;
 
-    @ManyToMany
+    //@ManyToMany
+    @Transient
     private Set<Client> relatives = new HashSet<>();
     
     public Client() {
