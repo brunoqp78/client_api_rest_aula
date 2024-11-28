@@ -1,5 +1,6 @@
 package org.iftm.client_api_rest.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,8 +96,14 @@ public class ClientService {
 
     // Regra adicional : A categoria é obrigatória nesse contexto
     private void validateCategory(Category category) {
+        
         if (category == null) {
             throw new IllegalArgumentException("Client must be associated with a category.");
         }
+    }
+
+    @Transactional
+    private void saveClients(ArrayList<Client> clients){
+        clientRepository.saveAll(clients);
     }
 }
