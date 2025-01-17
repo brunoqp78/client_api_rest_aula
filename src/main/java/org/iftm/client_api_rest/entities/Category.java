@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Client> clients = new ArrayList<>();
 
     public Category() {

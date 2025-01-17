@@ -2,6 +2,8 @@ package org.iftm.client_api_rest.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Address implements Serializable {
     private String zipCode;
 
     @OneToOne(mappedBy = "address")
+    @JsonBackReference
     private Client client;
 
     public Address(Long id, String street, String city, String state, String zipCode) {
